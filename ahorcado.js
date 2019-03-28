@@ -10,6 +10,7 @@ let seleccionada = peliculas[random];
 let incorrectas = [];
 let correctas = [];
 
+
 //separa las letras (para poder compararlas con lo que cliquee el usuario)
 //crea un Array igual de largo que la palabra y lo llena de guiones
 let letrasSeparadas = Array.from(seleccionada);
@@ -35,6 +36,7 @@ document.getElementById("play").addEventListener("click", function(){
     console.log(seleccionada.length);
     console.log(seleccionada);
     document.getElementById("play").removeAttribute("id");
+
 });
 
 //Escucha lo que cliquea el usuario y cerifica si son las letras correctas o no
@@ -69,6 +71,9 @@ document.addEventListener('click', function(e){
 		console.log('guiones :' + guionesJuntos);
  		document.getElementById("titulo").innerHTML = guionesJuntos;
 
+ 		let noAdivinada = guionesJuntos.includes("_ ");
+ 		if(!noAdivinada){
+ 			setTimeout (function(){ alert("ganaste"); }, 700);
+ 		}
  		}
  	});
- 
