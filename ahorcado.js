@@ -36,7 +36,7 @@ document.addEventListener('click', function(e){
  	
  	if(!acierto){ 			
  		vidas--;
- 		
+ 		document.getElementById("vidas").innerHTML = vidas;
  		console.log(vidas);
  		incorrectas.push(letraCliqueada);
  		console.log(incorrectas);
