@@ -1,13 +1,17 @@
-let peliculas = ['ALIEN', 'BRAVE', 'MOTHER', 'DUMBO', 'FROZEN'];
+let peliculas = ['ALIEN', 'BRAVE', 'TITANIC', 'DUMBO', 'FORREST GUMP', 
+'THE GODFATHER', 'CASABLANCA', 'TODO SOBRE MI MADRE', 'RELATOS SALVAJES', 'GRAVITY'];
 let vidas = 7;
 let letras = document.getElementsByClassName("letter");
 document.getElementById("vidas").innerHTML = vidas;
+
 //selector random de películas
-const random = Math.floor(Math.random()*5);
+const random = Math.floor(Math.random()*10);
 let seleccionada = peliculas[random];
 let incorrectas = [];
+let correctas = [];
+
 //separa las letras (para poder compararlas con lo que cliquee el usuario)
-//crea unAarray igual de largo que la palabra y lo llena de guiones
+//crea un Array igual de largo que la palabra y lo llena de guiones
 let letrasSeparadas = Array.from(seleccionada);
 let largo = letrasSeparadas.length;
 let aAdivinar =[""];
@@ -18,7 +22,12 @@ for(let i = 1; i< largo+1; i++){
 //Junta los guiones para que en pantalla no se muestre la coma que separa los elementos del Array
 let guionesJuntos = aAdivinar.join(" ");
 console.log('la pelicula es ' + guionesJuntos);
-
+//Si el título incluye un espacio, lo agrega
+if (letrasSeparadas.includes(" ")) {
+espacio = letrasSeparadas.indexOf(" ") +1;
+console.log('lugar del espacio: ' +espacio);
+aAdivinar[espacio] = "&nbsp;" ;//&nbsp; es el espacio porque " " no puede ser un elemento en un Array 
+}
 //Escucha cuando el usuario cliquea play y le muesta los guiones en la pantalla
 document.getElementById("play").addEventListener("click", function(){	 
 	document.getElementById("titulo").innerHTML = guionesJuntos;
@@ -45,12 +54,21 @@ document.addEventListener('click', function(e){
  			alert('perdiste');
  		}
  	}else{
- 		lugar = letrasSeparadas.indexOf(letraCliqueada)+1;
- 		aAdivinar[lugar] = letraCliqueada;
- 		let guionesJuntos = aAdivinar.join(" ");
- 		console.log('aAdivinar: ' + aAdivinar);
- 		console.log(lugar);
- 		document.getElementById("titulo").innerHTML = guionesJuntos  ;
+		for (var i=0; i<letrasSeparadas.length; i++){
+			if(letrasSeparadas[i]===letraCliqueada){
+				aAdivinar[i+1] = letraCliqueada;
+				correctas.push(letraCliqueada);
+ 		 		guionesJuntos = aAdivinar.join(" ");
+				console.log('guiones :' + guionesJuntos);
+ 				console.log('aAdivinar: ' + aAdivinar);
+ 				console.log(i); 		
+				}
+			}
+
+ 		guionesJuntos = aAdivinar.join(" ");
+		console.log('guiones :' + guionesJuntos);
+ 		document.getElementById("titulo").innerHTML = guionesJuntos;
+
  		}
  	});
  
