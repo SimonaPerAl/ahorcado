@@ -4,11 +4,23 @@ let vidas = 7;
 let letras = document.getElementsByClassName("letter");
 document.getElementById("vidas").innerHTML = vidas;
 
+let incorrectas = [];
+let correctas = [];
+let aAdivinar = [];
+let guionesJuntos = [];
+
+//Escucha cuando el usuario cliquea play y le muesta los guiones en la pantalla
+document.getElementById("play").addEventListener("click", function(){
+
+
+
+
+
+
 //selector random de películas
 const random = Math.floor(Math.random()*10);
 let seleccionada = peliculas[random];
-let incorrectas = [];
-let correctas = [];
+
 
 
 //separa las letras (para poder compararlas con lo que cliquee el usuario)
@@ -24,20 +36,27 @@ for(let i = 1; i< largo+1; i++){
 let guionesJuntos = aAdivinar.join(" ");
 console.log('la pelicula es ' + guionesJuntos);
 //Si el título incluye un espacio, lo agrega
-if (letrasSeparadas.includes(" ")) {
-espacio = letrasSeparadas.indexOf(" ") +1;
-console.log('lugar del espacio: ' +espacio);
-aAdivinar[espacio] = "&nbsp;" ;//&nbsp; es el espacio porque " " no puede ser un elemento en un Array 
+for (var i=0; i<letrasSeparadas.length; i++){
+if (letrasSeparadas[i] === " ") {
+aAdivinar[i+1] = "&nbsp;" ;//&nbsp; es el espacio porque " " no puede ser un elemento en un Array 
 }
-//Escucha cuando el usuario cliquea play y le muesta los guiones en la pantalla
-document.getElementById("play").addEventListener("click", function(){	 
+}
+
+
+
+
+
+
+
 	document.getElementById("titulo").innerHTML = guionesJuntos;
     console.log(letrasSeparadas);
     console.log(seleccionada.length);
     console.log(seleccionada);
     document.getElementById("play").removeAttribute("id");
 
-});
+
+
+
 
 //Escucha lo que cliquea el usuario y cerifica si son las letras correctas o no
 document.addEventListener('click', function(e){ 		
@@ -77,3 +96,10 @@ document.addEventListener('click', function(e){
  		}
  		}
  	});
+
+
+
+
+
+});
+
